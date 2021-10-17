@@ -3,8 +3,8 @@ import { Form } from "./components/Form/Form";
 import FormList from "./components/FormList/FormList";
 import Filter from "./components/Filter/Filter";
 import Container from "./components/Container/Container";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
-import { v4 as uuidv } from "uuid";
 
 class App extends Component {
   state = {
@@ -18,7 +18,7 @@ class App extends Component {
   };
   addContact = ({ name, number }) => {
     const contact = {
-      id: uuidv(),
+      id: uuidv4(),
       name,
       number,
     };
@@ -28,6 +28,7 @@ class App extends Component {
           contacts: [contact, ...prevState.contacts],
         }));
   };
+
   addNewContact = (obj) => {
     this.setState((prevState) => {
       return { contacts: [...prevState.contacts, obj] };
@@ -59,7 +60,7 @@ class App extends Component {
     return (
       <Container>
         <h1>Phonebook</h1>
-        <Form addNewContact={this.addNewContact} />
+        <Form addNewContact={this.addContact} />
         <h2>Contacts</h2>{" "}
         {contacts.length > 1 && (
           <Filter value={filter} onChange={this.changeFilter} />
