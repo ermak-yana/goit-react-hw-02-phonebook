@@ -54,11 +54,15 @@ class App extends Component {
     }));
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    const contacts = localStorage.getItem("contacts");
+    const parseContacts = JSON.parse(contacts);
+    if (parseContacts) {
+      this.setState({ contacts: parseContacts });
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevState);
-    console.log(this.state);
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
     }
